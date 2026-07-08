@@ -32,7 +32,7 @@ export async function runCli(argv = process.argv): Promise<void> {
     .action(async (options: { path: string; format: string; output?: string }) => {
       const format = parseFormat(options.format);
       const result = await scanWorkflows({ path: options.path });
-      const output = render(format, result);
+      const output = render(format, result, { color: options.output ? false : undefined });
 
       if (options.output) {
         await writeReport(options.output, output);
@@ -71,7 +71,7 @@ function parseFormat(format: string): OutputFormat {
   throw new Error(`Unsupported format "${format}". Expected text, json, or sarif.`);
 }
 
-function render(format: OutputFormat, result: ScanResult): string {
+function render(format: OutputFormat, result: ScanResult, options: { color?: boolean } = {}): string {
   if (format === "json") {
     return formatJson(result);
   }
@@ -80,7 +80,7 @@ function render(format: OutputFormat, result: ScanResult): string {
     return formatSarif(result);
   }
 
-  return formatText(result);
+  return formatText(result, { color: options.color });
 }
 
 async function writeReport(outputPath: string, output: string): Promise<void> {

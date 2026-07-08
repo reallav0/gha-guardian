@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { formatJson } from "../src/reporters/json.js";
 import { formatSarif } from "../src/reporters/sarif.js";
+import { formatText } from "../src/reporters/text.js";
 import type { ScanResult } from "../src/scanner/types.js";
 
 const result: ScanResult = {
@@ -43,5 +44,27 @@ describe("reporters", () => {
     expect(sarif.version).toBe("2.1.0");
     expect(sarif.runs[0]?.tool.driver.rules.length).toBeGreaterThan(0);
     expect(sarif.runs[0]?.results).toHaveLength(1);
+  });
+
+  it("text reporter can colorize warnings for terminal output", () => {
+    const firstFinding = result.findings[0];
+    if (!firstFinding) {
+      throw new Error("expected test fixture to include a finding");
+    }
+
+    const colored = formatText(result, { color: true });
+    const warning = formatText(
+      {
+        ...result,
+        findings: [{ ...firstFinding, severity: "MEDIUM" }]
+      },
+      { color: true }
+    );
+    const plain = formatText(result, { color: false });
+
+    expect(colored).toContain("\u001B[31m");
+    expect(warning).toContain("\u001B[33m");
+    expect(colored).toContain("\u001B[1m");
+    expect(plain).not.toContain("\u001B[31m");
   });
 });
