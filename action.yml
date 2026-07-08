@@ -1,0 +1,41 @@
+name: gha-guardian
+description: Scan GitHub Actions workflows for risky CI/CD security patterns.
+author: gha-guardian contributors
+
+inputs:
+  path:
+    description: Repository root, workflow directory, or workflow file to scan.
+    required: false
+    default: "."
+  format:
+    description: Output format: text, json, or sarif.
+    required: false
+    default: "sarif"
+  output:
+    description: Optional output file path.
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: Enable Corepack
+      shell: bash
+      run: corepack enable
+
+    - name: Install action dependencies
+      shell: bash
+      run: pnpm --dir "$GITHUB_ACTION_PATH" install --frozen-lockfile
+
+    - name: Build scanner
+      shell: bash
+      run: pnpm --dir "$GITHUB_ACTION_PATH" build
+
+    - name: Run gha-guardian
+      shell: bash
+      run: |
+        args=(scan --path "${{ inputs.path }}" --format "${{ inputs.format }}")
+        if [ -n "${{ inputs.output }}" ]; then
+          args+=(--output "${{ inputs.output }}")
+        fi
+        node "$GITHUB_ACTION_PATH/dist/cli.js" "${args[@]}"

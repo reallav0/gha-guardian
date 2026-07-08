@@ -1,0 +1,19 @@
+name: vulnerable-pr
+
+on:
+  pull_request:
+  pull_request_target:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests with secret
+        run: npm test -- --token "${{ secrets.NPM_TOKEN }}"

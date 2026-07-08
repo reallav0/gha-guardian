@@ -1,0 +1,12 @@
+node_modules/
+.pnpm-store/
+dist/
+coverage/
+.agents/
+.codex/
+*.log
+.DS_Store
+.env
+.env.*
+gha-guardian.sarif
+results.sarif
