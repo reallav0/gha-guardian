@@ -2,9 +2,10 @@
 
 > A security scanner for GitHub Actions workflows - find risky CI/CD patterns before attackers do.
 
-[![CI](https://img.shields.io/badge/ci-placeholder-lightgrey)](#)
-[![npm](https://img.shields.io/badge/npm-placeholder-lightgrey)](#)
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![CI](https://github.com/reallav0/gha-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/reallav0/gha-guardian/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/gha-guardian.svg)](https://www.npmjs.com/package/gha-guardian)
+[![npm downloads](https://img.shields.io/npm/dm/gha-guardian.svg)](https://www.npmjs.com/package/gha-guardian)
+[![license](https://img.shields.io/npm/l/gha-guardian.svg)](LICENSE)
 
 `gha-guardian` is a CLI-first security scanner for `.github/workflows/*.yml` and `.yaml` files. It helps maintainers find risky GitHub Actions patterns such as broad token permissions, unsafe `pull_request_target` workflows, unpinned third-party actions, missing job timeouts, and long-lived cloud credential secrets.
 
@@ -13,6 +14,8 @@
 GitHub Actions workflows are part of the software supply chain. A risky workflow can expose repository secrets, grant write tokens to attacker-controlled code, or pull mutable third-party action code during a privileged build. `gha-guardian` gives open-source projects a small, fast scanner that is easy to run locally, in CI, and as a GitHub Action.
 
 ## Installation
+
+View the published package on npm: [gha-guardian](https://www.npmjs.com/package/gha-guardian).
 
 ```bash
 npm install -g gha-guardian
