@@ -4,14 +4,14 @@
   "description": "A security scanner for GitHub Actions workflows.",
   "type": "module",
   "license": "MIT",
-  "author": "",
-  "homepage": "https://github.com/nguyend-nhatnguyen/gha-guardian#readme",
+  "author": "Nhat Nguyen",
+  "homepage": "https://github.com/reallav0/gha-guardian#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nguyend-nhatnguyen/gha-guardian.git"
+    "url": "git+https://github.com/reallav0/gha-guardian.git"
   },
   "bugs": {
-    "url": "https://github.com/nguyend-nhatnguyen/gha-guardian/issues"
+    "url": "https://github.com/reallav0/gha-guardian/issues"
   },
   "keywords": [
     "github-actions",
@@ -24,6 +24,8 @@
   "bin": {
     "gha-guardian": "dist/cli.js"
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -45,7 +47,13 @@
     "test:watch": "vitest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "scan:examples": "tsx src/cli.ts scan --path examples/vulnerable"
+    "scan:examples": "tsx src/cli.ts scan --path examples/vulnerable",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm lint && pnpm test && pnpm build",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "commander": "^12.1.0",

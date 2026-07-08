@@ -1,6 +1,6 @@
 # gha-guardian
 
-> A security scanner for GitHub Actions workflows — find risky CI/CD patterns before attackers do.
+> A security scanner for GitHub Actions workflows - find risky CI/CD patterns before attackers do.
 
 [![CI](https://img.shields.io/badge/ci-placeholder-lightgrey)](#)
 [![npm](https://img.shields.io/badge/npm-placeholder-lightgrey)](#)
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nguyend-nhatnguyen/gha-guardian@v1
+      - uses: reallav0/gha-guardian@v1
         with:
           path: "."
           format: "sarif"
@@ -129,14 +129,14 @@ jobs:
 
 Each rule has examples and remediation guidance:
 
-- [GHA001 — Avoid `permissions: write-all`](docs/rules/GHA001-no-write-all.md)
-- [GHA002 — Require explicit top-level `permissions`](docs/rules/GHA002-require-permissions.md)
-- [GHA003 — Pin third-party actions](docs/rules/GHA003-pin-actions.md)
-- [GHA004 — Dangerous `pull_request_target` usage](docs/rules/GHA004-dangerous-pr-target.md)
-- [GHA005 — Secrets used in pull request workflows](docs/rules/GHA005-secrets-in-pr.md)
-- [GHA006 — Missing `timeout-minutes`](docs/rules/GHA006-timeout-minutes.md)
-- [GHA007 — Broad job permissions](docs/rules/GHA007-broad-permissions.md)
-- [GHA008 — Use OIDC instead of long-lived cloud credentials](docs/rules/GHA008-oidc-cloud-secrets.md)
+- [GHA001 - Avoid `permissions: write-all`](docs/rules/GHA001-no-write-all.md)
+- [GHA002 - Require explicit top-level `permissions`](docs/rules/GHA002-require-permissions.md)
+- [GHA003 - Pin third-party actions](docs/rules/GHA003-pin-actions.md)
+- [GHA004 - Dangerous `pull_request_target` usage](docs/rules/GHA004-dangerous-pr-target.md)
+- [GHA005 - Secrets used in pull request workflows](docs/rules/GHA005-secrets-in-pr.md)
+- [GHA006 - Missing `timeout-minutes`](docs/rules/GHA006-timeout-minutes.md)
+- [GHA007 - Broad job permissions](docs/rules/GHA007-broad-permissions.md)
+- [GHA008 - Use OIDC instead of long-lived cloud credentials](docs/rules/GHA008-oidc-cloud-secrets.md)
 
 ## Development setup
 

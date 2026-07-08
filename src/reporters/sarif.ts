@@ -12,7 +12,7 @@ export function formatSarif(result: ScanResult, rules: readonly Rule[] = allRule
           tool: {
             driver: {
               name: "gha-guardian",
-              informationUri: "https://github.com/nguyend-nhatnguyen/gha-guardian",
+              informationUri: "https://github.com/reallav0/gha-guardian",
               rules: rules.map((rule) => ({
                 id: rule.id,
                 name: rule.title,
@@ -25,7 +25,7 @@ export function formatSarif(result: ScanResult, rules: readonly Rule[] = allRule
                 help: {
                   text: rule.recommendation
                 },
-                helpUri: `https://github.com/nguyend-nhatnguyen/gha-guardian/blob/main/docs/rules/${rule.id}-${ruleSlug(rule)}.md`,
+                helpUri: `https://github.com/reallav0/gha-guardian/blob/main/docs/rules/${rule.id}-${ruleSlug(rule)}.md`,
                 properties: {
                   precision: "medium",
                   securitySeverity: sarifSecuritySeverity(rule.severity),
