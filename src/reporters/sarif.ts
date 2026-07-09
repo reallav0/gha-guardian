@@ -67,20 +67,20 @@ export function formatSarif(result: ScanResult, rules: readonly Rule[] = allRule
 }
 
 function ruleSlug(rule: Rule): string {
-  const slug = rule.id === "GHA001"
-    ? "no-write-all"
-    : rule.id === "GHA002"
-      ? "require-permissions"
-      : rule.id === "GHA003"
-        ? "pin-actions"
-        : rule.id === "GHA004"
-          ? "dangerous-pr-target"
-          : rule.id === "GHA005"
-            ? "secrets-in-pr"
-            : rule.id === "GHA006"
-              ? "timeout-minutes"
-              : rule.id === "GHA007"
-                ? "broad-permissions"
-                : "oidc-cloud-secrets";
-  return slug;
+  const slugs: Record<string, string> = {
+    GHA001: "no-write-all",
+    GHA002: "require-permissions",
+    GHA003: "pin-actions",
+    GHA004: "dangerous-pr-target",
+    GHA005: "secrets-in-pr",
+    GHA006: "timeout-minutes",
+    GHA007: "broad-permissions",
+    GHA008: "oidc-cloud-secrets",
+    GHA009: "untrusted-context-in-run",
+    GHA010: "remote-script-execution",
+    GHA011: "self-hosted-runner",
+    GHA012: "secrets-inherit"
+  };
+
+  return slugs[rule.id] ?? rule.id.toLowerCase();
 }

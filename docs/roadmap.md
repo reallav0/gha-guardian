@@ -13,7 +13,7 @@
 - Cache poisoning risks.
 - Artifact poisoning risks.
 - `pull_request_target` checkout of `github.event.pull_request.head.sha`.
-- Shell injection through untrusted contexts.
+- Unsafe dependency installation bootstrap commands beyond simple pipe-to-shell patterns.
 - Overbroad package publishing permissions.
 - Untrusted third-party composite actions.
 

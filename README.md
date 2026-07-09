@@ -80,6 +80,10 @@ gha-guardian found 5 issues in 2 workflow files
 | [GHA006](docs/rules/GHA006-timeout-minutes.md) | LOW | Require `timeout-minutes` on jobs |
 | [GHA007](docs/rules/GHA007-broad-permissions.md) | MEDIUM | Detect broad write permissions |
 | [GHA008](docs/rules/GHA008-oidc-cloud-secrets.md) | MEDIUM | Prefer OIDC over long-lived cloud credentials |
+| [GHA009](docs/rules/GHA009-untrusted-context-in-run.md) | HIGH | Detect untrusted GitHub context in shell commands |
+| [GHA010](docs/rules/GHA010-remote-script-execution.md) | HIGH | Detect remote scripts piped to shells |
+| [GHA011](docs/rules/GHA011-self-hosted-runner.md) | MEDIUM | Detect self-hosted runner usage |
+| [GHA012](docs/rules/GHA012-secrets-inherit.md) | MEDIUM | Detect `secrets: inherit` in reusable workflow calls |
 
 ## CLI usage
 
@@ -140,6 +144,10 @@ Each rule has examples and remediation guidance:
 - [GHA006 - Missing `timeout-minutes`](docs/rules/GHA006-timeout-minutes.md)
 - [GHA007 - Broad job permissions](docs/rules/GHA007-broad-permissions.md)
 - [GHA008 - Use OIDC instead of long-lived cloud credentials](docs/rules/GHA008-oidc-cloud-secrets.md)
+- [GHA009 - Untrusted GitHub context in shell commands](docs/rules/GHA009-untrusted-context-in-run.md)
+- [GHA010 - Remote script execution](docs/rules/GHA010-remote-script-execution.md)
+- [GHA011 - Self-hosted runner usage](docs/rules/GHA011-self-hosted-runner.md)
+- [GHA012 - Reusable workflow inherits all secrets](docs/rules/GHA012-secrets-inherit.md)
 
 ## Development setup
 

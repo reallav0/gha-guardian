@@ -1,6 +1,6 @@
 {
   "name": "gha-guardian",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A security scanner for GitHub Actions workflows.",
   "type": "module",
   "license": "MIT",

@@ -9,7 +9,11 @@ import {
   gha005SecretsInPr,
   gha006TimeoutMinutes,
   gha007BroadPermissions,
-  gha008OidcCloudSecrets
+  gha008OidcCloudSecrets,
+  gha009UntrustedContextInRun,
+  gha010RemoteScriptExecution,
+  gha011SelfHostedRunner,
+  gha012SecretsInherit
 } from "../src/rules/index.js";
 
 function check(rule: Rule, content: string) {
@@ -194,5 +198,86 @@ jobs:
 
     expect(findings).toHaveLength(1);
     expect(findings[0]?.ruleId).toBe("GHA008");
+  });
+
+  it("GHA009 detects untrusted GitHub context in shell commands", () => {
+    const findings = check(
+      gha009UntrustedContextInRun,
+      `
+name: test
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - run: echo "\${{ github.event.pull_request.title }}"
+`
+    );
+
+    expect(findings).toHaveLength(1);
+    expect(findings[0]?.ruleId).toBe("GHA009");
+  });
+
+  it("GHA010 detects remote scripts piped to shells", () => {
+    const findings = check(
+      gha010RemoteScriptExecution,
+      `
+name: test
+on: push
+permissions:
+  contents: read
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - run: curl -fsSL https://example.com/install.sh | bash
+`
+    );
+
+    expect(findings).toHaveLength(1);
+    expect(findings[0]?.ruleId).toBe("GHA010");
+  });
+
+  it("GHA011 detects self-hosted runners", () => {
+    const findings = check(
+      gha011SelfHostedRunner,
+      `
+name: test
+on: pull_request
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: [self-hosted, linux]
+    timeout-minutes: 10
+    steps: []
+`
+    );
+
+    expect(findings).toHaveLength(1);
+    expect(findings[0]?.ruleId).toBe("GHA011");
+  });
+
+  it("GHA012 detects secrets: inherit", () => {
+    const findings = check(
+      gha012SecretsInherit,
+      `
+name: test
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  deploy:
+    uses: org/repo/.github/workflows/deploy.yml@main
+    secrets: inherit
+`
+    );
+
+    expect(findings).toHaveLength(1);
+    expect(findings[0]?.ruleId).toBe("GHA012");
   });
 });

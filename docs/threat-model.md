@@ -12,11 +12,16 @@
 - Secrets referenced from pull request workflows.
 - Missing job runtime limits.
 - Long-lived cloud credential secret names.
+- Shell command injection through untrusted GitHub context interpolation.
+- Remote script pipe-to-shell installation patterns.
+- Self-hosted runners in workflows that may process untrusted code.
+- Reusable workflow calls that inherit all available secrets.
 
 ## Out of scope
 
 - Full data-flow analysis of shell scripts.
 - Runtime behavior of third-party actions.
+- Full shell parsing and command data-flow analysis.
 - Verification that a pinned SHA belongs to a trusted release.
 - Repository, organization, or environment policy inspection through the GitHub API.
 - Automatic remediation.
